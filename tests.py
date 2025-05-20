@@ -47,6 +47,19 @@ class Tests(unittest.TestCase):
             False,
         )
 
+    def test_reset_cells_visited(self):
+        num_rows = 3
+        num_cols = 2
+        m = Maze(0, 0, num_rows, num_cols, 10, 10)
+        # Manually set all visited flags to True
+        for col in m._Maze__cells:  # type: ignore[attr-defined]
+            for cell in col:
+                cell.visited = True
+        m._Maze__reset_cells_visited()  # type: ignore[attr-defined]
+        for col in m._Maze__cells:  # type: ignore[attr-defined]
+            for cell in col:
+                self.assertFalse(cell.visited)
+
 
 if __name__ == "__main__":
     unittest.main()
